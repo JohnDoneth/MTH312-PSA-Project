@@ -17,10 +17,11 @@ public class Backend {
 
     public int search(String password) throws Exception {
 
+        String lowerPw = password.toLowerCase();
         String path = null;
         try{
             // Make path to file
-            path = basePath + password.charAt(0) + "/" + password.charAt(1) + "/" + password.charAt(2);
+            path = basePath + lowerPw.charAt(0) + "/" + lowerPw.charAt(1) + "/" + lowerPw.charAt(2);
         }
         catch(ArrayIndexOutOfBoundsException e) {
             throw new Exception();
@@ -33,6 +34,7 @@ public class Backend {
             scan = new Scanner(new File(path));
         }
         catch(Exception e) {
+            System.out.println("here: " + path+"\n"+e);
             throw new Exception();
         }
 
@@ -43,11 +45,6 @@ public class Backend {
 
             // Check if this line is password being searched for
             temp = scan.nextLine();
-
-
-            System.out.println(temp);
-
-
             int index = -1;
             if(temp.matches(password + ":\\d+")) {
                     

@@ -25,11 +25,16 @@ public class InteractPane extends VBox{
         setAlignment(Pos.CENTER);
 
         // New backend for searching
-        String basePath = "../../passwords/full_counted/output/";
+        String basePath = "../passwords/full_counted/output/";
         Backend b = new Backend(basePath);  
 
         // To search:
 //        b.search(searchSting);
+        try {
+            System.out.println("Restult: " + b.search("Helena21"));
+        } catch(Exception e) {
+            System.out.println("error opening file");
+        }
         
         aboveLbl = new Label("Enter a Password");
         belowLbl = new Label("We Found 32 other users with the same password");
