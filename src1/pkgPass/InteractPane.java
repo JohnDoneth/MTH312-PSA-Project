@@ -13,7 +13,6 @@ import javafx.scene.layout.VBox;
 
 public class InteractPane extends VBox{
 
-<<<<<<< HEAD
 	//Labels
 	private Label aboveLbl;
 	private Label belowLbl;
@@ -47,15 +46,13 @@ public class InteractPane extends VBox{
 		numPass = 0;
 		
 		aboveLbl = new Label("Enter a Password:");
-		belowLbl = new Label("We Found "+getNumPass(passChk) + 
-							 " other users with the same password");
+		belowLbl = new Label();
 		checkBtn = new Button("Check Password");
 		
 		passTF = new TextField();
 		passTF.setPromptText("password");
 		
 		Alert passError = new Alert(AlertType.ERROR);
-		
 		
 		getChildren().addAll(aboveLbl,passTF, checkBtn, belowLbl);
 		
@@ -77,9 +74,8 @@ public class InteractPane extends VBox{
 		    	}	
 		    	else{
 		        //search
-		    	numPass = getNumPass(passTF.getText());
+		    	numPass = getNumPass(b, passTF.getText());
 		        checkBtn.setText(passTF.getText());
-		        
 		        
 		        //Update Findings
 		        belowLbl.setText("We Found "+ numPass + 
@@ -89,26 +85,16 @@ public class InteractPane extends VBox{
 		});
 		
 	}
-	
-
-	
-	    // To search:
-        // Passwords to try:
-            // helloyou1 -> 1504
-            // Morgan321 -> 5
 
 	//Returns the number of matched passwords
-	private int getNumPass(String searchString){
+	private int getNumPass(Backend b, String searchString){
 		
 		try {
-            numPass =  b.search(searchString);\
+            numPass =  b.search(searchString);
         } catch(Exception e) {
             System.out.println("error opening file");
         }
 		
 		return numPass;
 	}
-	
-
-
 }
