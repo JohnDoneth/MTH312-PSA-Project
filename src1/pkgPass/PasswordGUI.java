@@ -43,9 +43,11 @@ public class PasswordGUI extends Application{
         //Setting up Main Pane
         mainPn.setTop(menuBar);
         mainPn.setCenter(InteractPn);
+        mainPn.setId("pane");
         
         //Setting up stage
         Scene mainScene = new Scene(mainPn, 800, 600);
+        mainScene.getStylesheets().addAll(this.getClass().getResource("BGimage.css").toExternalForm());
         primaryStage.setScene(mainScene);
         primaryStage.show();
 

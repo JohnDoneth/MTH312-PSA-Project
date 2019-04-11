@@ -21,7 +21,7 @@ public class InteractPane extends VBox{
 	private TextField passTF;
 	
 	//Password to be checked
-	private String passChk;
+	private String searchString;
 	
 	//Number of found passwords
 	private int numPass;
@@ -38,11 +38,13 @@ public class InteractPane extends VBox{
 		setAlignment(Pos.CENTER);
 		
 		//initializing variables and fields
+		
 		// New backend for searching
         String basePath = "../passwords/full_counted/output/";
         Backend b = new Backend(basePath);  
 		
-		passChk = "Password123";
+        
+		searchString = "Password123";
 		numPass = 0;
 		
 		aboveLbl = new Label("Enter a Password:");
@@ -50,6 +52,7 @@ public class InteractPane extends VBox{
 		checkBtn = new Button("Check Password");
 		
 		passTF = new TextField();
+		passTF.setMaxWidth(200);
 		passTF.setPromptText("password");
 		
 		Alert passError = new Alert(AlertType.ERROR);
@@ -61,40 +64,32 @@ public class InteractPane extends VBox{
 		    @Override public void handle(ActionEvent e) {
 		        
 		    	//get password
-		    	passChk = passTF.getText();
+		    	searchString = passTF.getText();
 		        
 		    	//check validity of password
-		    	if(passChk.length() < 3 ){
+		    	if(searchString.length() < 3 ){
 		    		passError.setContentText("Password must contain at least 3 characters");
 		    		passError.showAndWait();
 		    	}
-		    	else if(passChk.contains(" ")){
+		    	else if(searchString.contains(" ")){
 		    		passError.setContentText("Password cannot contain spaces");
 		    		passError.showAndWait();
 		    	}	
 		    	else{
-		        //search
-		    	numPass = getNumPass(b, passTF.getText());
-		        checkBtn.setText(passTF.getText());
-		        
-		        //Update Findings
-		        belowLbl.setText("We Found "+ numPass + 
-							 " other users with the same password");
+		    		//search
+		    		try{
+		    			numPass = b.search(searchString);;
+		    		} catch(Exception exc) {
+		    			passError.setContentText("Error Opening File");
+			    		passError.showAndWait();
+		            }
+		    		
+			        //Update Findings
+			        belowLbl.setText("We Found "+ numPass + 
+								 " other users with the same password");
 		    	}
 		    }
 		});
 		
-	}
-
-	//Returns the number of matched passwords
-	private int getNumPass(Backend b, String searchString){
-		
-		try {
-            numPass =  b.search(searchString);
-        } catch(Exception e) {
-            System.out.println("error opening file");
-        }
-		
-		return numPass;
 	}
 }
