@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 
 public class InteractPane extends VBox{
 
+<<<<<<< HEAD
 	//Labels
 	private Label aboveLbl;
 	private Label belowLbl;
@@ -38,6 +39,10 @@ public class InteractPane extends VBox{
 		setAlignment(Pos.CENTER);
 		
 		//initializing variables and fields
+		// New backend for searching
+        String basePath = "../passwords/full_counted/output/";
+        Backend b = new Backend(basePath);  
+		
 		passChk = "Password123";
 		numPass = 0;
 		
@@ -86,16 +91,21 @@ public class InteractPane extends VBox{
 	}
 	
 
+	
+	    // To search:
+        // Passwords to try:
+            // helloyou1 -> 1504
+            // Morgan321 -> 5
 
 	//Returns the number of matched passwords
-	private int getNumPass(String str){
+	private int getNumPass(String searchString){
 		
-		int numPass = 0;
-		if (str.length() == 3)
-			numPass = 1;
+		try {
+            numPass =  b.search(searchString);\
+        } catch(Exception e) {
+            System.out.println("error opening file");
+        }
 		
-		
-			//FIXME Connect to Corbin's search here.
 		return numPass;
 	}
 	
