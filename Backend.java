@@ -3,6 +3,8 @@ import java.io.File;
 
 public class Backend {
 
+    private final int SUB_DIR_COUNT = 3;
+
     private String basePath;
     
     public Backend(String basePath) {
@@ -15,10 +17,25 @@ public class Backend {
 
     public int search(String password) throws Exception {
 
-        String path = null;
+        String path = basePath;
         try{
             // Make path to file
-            path = basePath + password.charAt(0) + "/" + password.charAt(1) + "/" + password.charAt(2);
+            for(int i=0; i<SUB_DIR_COUNT; ++i) {
+                char c = password.charAt(i);
+                if(Character.isDigit(c) || Character.isLetter(c)) {
+                    path += c + "/";
+                }
+                else {
+                    path += "symbols/";
+                }
+            }  
+
+            // Remove the last '/'
+            path = path.substring(0, path.length()-1);
+
+//             path = basePath + password.charAt(0) + "/" + password.charAt(1) + "/" + password.charAt(2);
+
+
         }
         catch(ArrayIndexOutOfBoundsException e) {
             throw new Exception();
@@ -43,7 +60,7 @@ public class Backend {
             temp = scan.nextLine();
 
 
-            System.out.println(temp);
+//            System.out.println(temp);
 
 
             int index = -1;
@@ -68,14 +85,16 @@ public class Backend {
         return -1;
     }
 
-//    public static void main(String[] args) {
-//        Backend b = new Backend();
-//        try {
+    public static void main(String[] args) {
+        Backend b = new Backend();
+        try {
 //            System.out.println("Result: " + b.search(args[0]));
-//        }
-//        catch(Exception e) {
-//            System.out.println("Oops");
-//        }
-//    }
+
+            System.out.println("Result: " + b.search("@8ball"));
+        }
+        catch(Exception e) {
+            System.out.println("Oops");
+        }
+    }
 
 }
