@@ -29,11 +29,21 @@ public class InteractPane extends VBox{
         Backend b = new Backend(basePath);  
 
         // To search:
+///////////////////////////////////////////////////////////////////////
+        // Passwords to try:
+            // helloyou1 -> 1504
+            // Morgan321 -> 5
+
+        String searchString = "Morgan321";
+
         try {
-            System.out.println("Restult: " + b.search("Helena21"));
+            System.out.println("Restult: " + b.search(searchString));
+        } catch(IllegalArgumentException e) {
+            System.out.println("Searched string too short");
         } catch(Exception e) {
             System.out.println("error opening file");
         }
+///////////////////////////////////////////////////////////////////////
         
         aboveLbl = new Label("Enter a Password");
         belowLbl = new Label("We Found 32 other users with the same password");

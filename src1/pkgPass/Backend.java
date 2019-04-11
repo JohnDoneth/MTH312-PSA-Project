@@ -22,9 +22,11 @@ public class Backend {
         try{
             // Make path to file
             path = basePath + lowerPw.charAt(0) + "/" + lowerPw.charAt(1) + "/" + lowerPw.charAt(2);
+
+            // TODO: account for symbols in first 3 chars
         }
         catch(ArrayIndexOutOfBoundsException e) {
-            throw new Exception();
+            throw new IllegalArgumentException();
         }
 
         Scanner scan = null;
