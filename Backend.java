@@ -32,10 +32,6 @@ public class Backend {
 
             // Remove the last '/'
             path = path.substring(0, path.length()-1);
-
-//             path = basePath + password.charAt(0) + "/" + password.charAt(1) + "/" + password.charAt(2);
-
-
         }
         catch(ArrayIndexOutOfBoundsException e) {
             throw new Exception();
@@ -58,11 +54,6 @@ public class Backend {
 
             // Check if this line is password being searched for
             temp = scan.nextLine();
-
-
-//            System.out.println(temp);
-
-
             int index = -1;
             if(temp.matches(password + ":\\d+")) {
                     
@@ -85,16 +76,16 @@ public class Backend {
         return -1;
     }
 
-    public static void main(String[] args) {
-        Backend b = new Backend();
-        try {
-//            System.out.println("Result: " + b.search(args[0]));
+//    public static void main(String[] args) {
+//        Backend b = new Backend();
+//        try {
+////            System.out.println("Result: " + b.search(args[0]));
 
-            System.out.println("Result: " + b.search("@8ball"));
-        }
-        catch(Exception e) {
-            System.out.println("Oops");
-        }
-    }
+//            System.out.println("Result: " + b.search("#8balla"));
+//        }
+//        catch(Exception e) {
+//            System.out.println("Oops");
+//        }
+//    }
 
 }
