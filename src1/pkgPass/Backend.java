@@ -1,9 +1,9 @@
-package pkgPass;
-
 import java.util.Scanner;
 import java.io.File;
 
 public class Backend {
+
+    private final int SUB_DIR_COUNT = 3;
 
     private String basePath;
     
@@ -17,16 +17,24 @@ public class Backend {
 
     public int search(String password) throws Exception {
 
-        String lowerPw = password.toLowerCase();
-        String path = null;
+        String path = basePath;
         try{
             // Make path to file
-            path = basePath + lowerPw.charAt(0) + "/" + lowerPw.charAt(1) + "/" + lowerPw.charAt(2);
+            for(int i=0; i<SUB_DIR_COUNT; ++i) {
+                char c = password.charAt(i);
+                if(Character.isDigit(c) || Character.isLetter(c)) {
+                    path += c + "/";
+                }
+                else {
+                    path += "symbols/";
+                }
+            }  
 
-            // TODO: account for symbols in first 3 chars
+            // Remove the last '/'
+            path = path.substring(0, path.length()-1);
         }
         catch(ArrayIndexOutOfBoundsException e) {
-            throw new IllegalArgumentException();
+            throw new Exception();
         }
 
         Scanner scan = null;
@@ -36,7 +44,6 @@ public class Backend {
             scan = new Scanner(new File(path));
         }
         catch(Exception e) {
-            System.out.println("here: " + path+"\n"+e);
             throw new Exception();
         }
 
@@ -72,7 +79,9 @@ public class Backend {
 //    public static void main(String[] args) {
 //        Backend b = new Backend();
 //        try {
-//            System.out.println("Result: " + b.search(args[0]));
+////            System.out.println("Result: " + b.search(args[0]));
+
+//            System.out.println("Result: " + b.search("#8balla"));
 //        }
 //        catch(Exception e) {
 //            System.out.println("Oops");
