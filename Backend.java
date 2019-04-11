@@ -68,14 +68,14 @@ public class Backend {
         return -1;
     }
 
-    public static void main(String[] args) {
-        Backend b = new Backend();
-        try {
-            System.out.println("Result: " + b.search(args[0]));
-        }
-        catch(Exception e) {
-            System.out.println("Oops");
-        }
-    }
+//    public static void main(String[] args) {
+//        Backend b = new Backend();
+//        try {
+//            System.out.println("Result: " + b.search(args[0]));
+//        }
+//        catch(Exception e) {
+//            System.out.println("Oops");
+//        }
+//    }
 
 }
