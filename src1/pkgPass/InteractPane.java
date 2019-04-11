@@ -29,7 +29,6 @@ public class InteractPane extends VBox{
         Backend b = new Backend(basePath);  
 
         // To search:
-//        b.search(searchSting);
         try {
             System.out.println("Restult: " + b.search("Helena21"));
         } catch(Exception e) {
