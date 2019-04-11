@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class InteractPane extends VBox{
 
@@ -48,7 +49,14 @@ public class InteractPane extends VBox{
 		numPass = 0;
 		
 		aboveLbl = new Label("Enter a Password:");
+		aboveLbl.setTextFill(Color.web("#ffffff"));
+		aboveLbl.setStyle("-fx-font: 24 arial;");
+		
 		belowLbl = new Label();
+		belowLbl.setTextFill(Color.web("#ffffff"));
+		belowLbl.setStyle("-fx-font: 24 arial;");
+		
+		
 		checkBtn = new Button("Check Password");
 		
 		passTF = new TextField();
