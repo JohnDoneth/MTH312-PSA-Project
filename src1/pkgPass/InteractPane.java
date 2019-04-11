@@ -1,6 +1,5 @@
 package pkgPass;
 
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -36,9 +35,10 @@ public class InteractPane extends VBox{
 		aboveLbl = new Label("Enter a Password:");
 		belowLbl = new Label("We Found "+getNumPass(passChk) + 
 							 " other users with the same password");
-	
-		passTF = new TextField("password");
 		checkBtn = new Button("Check Password");
+		
+		passTF = new TextField();
+		passTF.setPromptText("password");
 		
 		getChildren().addAll(aboveLbl,passTF, checkBtn, belowLbl);
 		
