@@ -1,5 +1,3 @@
-package pkgPass;
-
 import java.util.Scanner;
 import java.io.File;
 
