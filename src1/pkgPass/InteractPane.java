@@ -41,7 +41,7 @@ public class InteractPane extends VBox{
 		//initializing variables and fields
 		
 		// New backend for searching
-        String basePath = "../passwords/full_counted/output/";
+        String basePath = "D:/full_counted/output/";
         Backend b = new Backend(basePath);  
 		
         
@@ -76,11 +76,11 @@ public class InteractPane extends VBox{
 		        
 		    	//check validity of password
 		    	if(searchString.length() < 3 ){
-		    		passError.setContentText("Password must contain at least 3 characters");
+		    		passError.setContentText("Password must contain at least 3 characters.");
 		    		passError.showAndWait();
 		    	}
 		    	else if(searchString.contains(" ")){
-		    		passError.setContentText("Password cannot contain spaces");
+		    		passError.setContentText("Password cannot contain spaces.");
 		    		passError.showAndWait();
 		    	}	
 		    	else{
@@ -88,13 +88,18 @@ public class InteractPane extends VBox{
 		    		try{
 		    			numPass = b.search(searchString);;
 		    		} catch(Exception exc) {
-		    			passError.setContentText("Error Opening File");
+		    			passError.setContentText("Error Opening File.");
 			    		passError.showAndWait();
 		            }
 		    		
 			        //Update Findings
+		    		if (numPass <= 0)
+		    			belowLbl.setText("There were no EXACT matches for this password");
+		    		else if (numPass == 1)
+		    			belowLbl.setText("There was 1 other site that contained this password");
+		    		else
 			        belowLbl.setText("We Found "+ numPass + 
-								 " other users with the same password");
+								 " other sites with the same password");
 		    	}
 		    }
 		});
