@@ -58,6 +58,7 @@ public class InteractPane extends VBox{
 		
 		
 		checkBtn = new Button("Check Password");
+		checkBtn.setDefaultButton(true);
 		
 		passTF = new TextField();
 		passTF.setMaxWidth(200);
