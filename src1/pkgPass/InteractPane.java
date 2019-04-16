@@ -17,6 +17,7 @@ public class InteractPane extends VBox{
 	//Labels
 	private Label aboveLbl;
 	private Label belowLbl;
+	private Label bottomLbl;
 	
 	//Text Field
 	private TextField passTF;
@@ -25,7 +26,8 @@ public class InteractPane extends VBox{
 	private String searchString;
 	
 	//Number of found passwords
-	private int numPass;
+	private int numExactPass;
+	private int numContainsPass;
 	
 	//Button 
 	private Button checkBtn; 
@@ -40,13 +42,14 @@ public class InteractPane extends VBox{
 		
 		//initializing variables and fields
 		
-		// New backend for searching
+		// New back end for searching
         String basePath = "D:/full_counted/output/";
         Backend b = new Backend(basePath);  
 		
         
 		searchString = "Password123";
-		numPass = 0;
+		numExactPass = 0;
+		numContainsPass = 0;
 		
 		aboveLbl = new Label("Enter a Password:");
 		aboveLbl.setTextFill(Color.web("#ffffff"));
@@ -56,6 +59,9 @@ public class InteractPane extends VBox{
 		belowLbl.setTextFill(Color.web("#ffffff"));
 		belowLbl.setStyle("-fx-font: 24 arial;");
 		
+		bottomLbl = new Label();
+		bottomLbl.setTextFill(Color.web("#ffffff"));
+		bottomLbl.setStyle("-fx-font: 24 arial;");
 		
 		checkBtn = new Button("Check Password");
 		checkBtn.setDefaultButton(true);
@@ -66,7 +72,7 @@ public class InteractPane extends VBox{
 		
 		Alert passError = new Alert(AlertType.ERROR);
 		
-		getChildren().addAll(aboveLbl,passTF, checkBtn, belowLbl);
+		getChildren().addAll(aboveLbl,passTF, checkBtn, belowLbl,bottomLbl);
 		
 		//action listener
 		checkBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -87,20 +93,30 @@ public class InteractPane extends VBox{
 		    	else{
 		    		//search
 		    		try{
-		    			numPass = b.search(searchString);;
+		    			numExactPass = b.search(searchString);
+		    			numContainsPass = b.contains(searchString);
 		    		} catch(Exception exc) {
 		    			passError.setContentText("Error Opening File.");
 			    		passError.showAndWait();
 		            }
 		    		
-			        //Update Findings
-		    		if (numPass <= 0)
+			        //Update Exact
+		    		if (numExactPass <= 0)
 		    			belowLbl.setText("There were no EXACT matches for this password");
-		    		else if (numPass == 1)
+		    		else if (numExactPass == 1)
 		    			belowLbl.setText("There was 1 other site that contained this password");
 		    		else
-			        belowLbl.setText("We Found "+ numPass + 
+			        belowLbl.setText("We Found "+ numExactPass + 
 								 " other sites with the same password");
+		    		
+		    		//Update Contains
+		    		if (numContainsPass <= 0)
+		    			bottomLbl.setText("There were no passwords containing that string");
+		    		else if (numContainsPass == 1)
+		    			bottomLbl.setText("There was 1 other site that contained this password");
+		    		else
+			        bottomLbl.setText("We Found "+ numContainsPass + 
+								 " other sites with a similar password");
 		    	}
 		    }
 		});
