@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -20,7 +21,8 @@ public class InteractPane extends VBox{
 	private Label bottomLbl;
 	
 	//Text Field
-	private TextField passTF;
+	//private TextField passTF;
+	private PasswordField passTF;
 	
 	//Password to be checked
 	private String searchString;
@@ -66,7 +68,8 @@ public class InteractPane extends VBox{
 		checkBtn = new Button("Check Password");
 		checkBtn.setDefaultButton(true);
 		
-		passTF = new TextField();
+		//passTF = new TextField();
+		passTF = new PasswordField();
 		passTF.setMaxWidth(200);
 		passTF.setPromptText("password");
 		
