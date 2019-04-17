@@ -22,24 +22,9 @@ public class Backend {
     public int search(String password) throws Exception {
 
         String path = basePath;
-        try{
-            // Make path to file
-            for(int i=0; i<SUB_DIR_COUNT; ++i) {
-                char c = password.charAt(i);
-                if(Character.isDigit(c) || Character.isLetter(c)) {
-                    path += c + "/";
-                }
-                else {
-                    path += "symbols/";
-                }
-            }  
+        
+        path = getPath(password.charAt(0),password.charAt(1),password.charAt(2),basePath);
 
-            // Remove the last '/'
-            path = path.substring(0, path.length()-1);
-        }
-        catch(ArrayIndexOutOfBoundsException e) {
-            throw new Exception();
-        }
 
         Scanner scan = null;
         try{
@@ -70,7 +55,6 @@ public class Backend {
         scan.close();
         return -1;
     }
-
     
     /**
      * Contains
@@ -92,7 +76,7 @@ public class Backend {
         				for(int k=48; k<=123; ++k) {
         					if (k <= 57 || 97 <= k && k <= 123){
         				        try{
-        				            path = getPath(i,j,k,basePath);
+        				            path = getPath((char)i,(char)j,(char)k,basePath);
         				            System.out.println(path);
         				         }catch(ArrayIndexOutOfBoundsException e) {
         				              throw new Exception();
@@ -140,27 +124,24 @@ public class Backend {
 
 
 
-private String getPath(int x,int y,int z,String bpath){
-	char ic =(char)x;
-	char jc =(char)y;
-	char kc =(char)z;
-	String str = ""+ic+jc+kc;
-	
-	 // Make path to file
-	 for(int i=0; i<SUB_DIR_COUNT; ++i) {
-	     char c = str.charAt(i);
-	     if(Character.isDigit(c) || Character.isLetter(c)) {
-	         bpath += c + "/";
-	     }
-	     else {
-	         bpath += "symbols/";
-	     }
-	 }  
-
-	 // Remove the last '/'
-	 bpath = bpath.substring(0, bpath.length()-1);
+	private String getPath(char x,char y,char z,String bpath){
+		String str = ""+x+y+z;
 		
-	 return bpath;
+		 // Make path to file
+		 for(int i=0; i<SUB_DIR_COUNT; ++i) {
+		     char c = str.charAt(i);
+		     if(Character.isDigit(c) || Character.isLetter(c)) {
+		         bpath += c + "/";
+		     }
+		     else {
+		         bpath += "symbols/";
+		     }
+		 }  
 	
+		 // Remove the last '/'
+		 bpath = bpath.substring(0, bpath.length()-1);
+			
+		 return bpath;
+		
 	}
 }
