@@ -63,7 +63,7 @@ public class Backend {
             // Check if this line is password being searched for
             temp = scan.nextLine();
             int index = -1;
-            if(temp.matches(password + ":\\d+")) {
+            if(temp.matches(password + ":\\d*")) {
                     
                 // Get index of start of count value
                 for(int i = temp.length()-1; i >= 0; --i) {

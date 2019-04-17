@@ -94,7 +94,7 @@ public class InteractPane extends VBox{
 		    		//search
 		    		try{
 		    			numExactPass = b.search(searchString);
-		    			numContainsPass = b.contains(searchString);
+		    			//numContainsPass = b.contains(searchString);
 		    		} catch(Exception exc) {
 		    			passError.setContentText("Error Opening File.");
 			    		passError.showAndWait();
