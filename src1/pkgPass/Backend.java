@@ -1,7 +1,9 @@
 package pkgPass;
 
 import java.util.Scanner;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 
 public class Backend {
 
@@ -22,38 +24,33 @@ public class Backend {
     public int search(String password) throws Exception {
 
         String path = basePath;
+        int num = 0;
         
         path = getPath(password.charAt(0),password.charAt(1),password.charAt(2),basePath);
 
-
-        Scanner scan = null;
+        BufferedReader scan = null;
+        
+        
+        
         try{
-
             // Open file to search
-            scan = new Scanner(new File(path));
+            scan = new BufferedReader(new FileReader(new File(path)));
         }
         catch(Exception e) {
             throw new Exception();
         }
 
         String temp = null;
-        String[] strArray;
         // Linear search for password
-        while(scan.hasNextLine()) {
 
-            // Check if this line is password being searched for
-            temp = scan.nextLine();
-            strArray = temp.split(":");
-            if (strArray[0].contains("pasha777.ru"))
-            	temp = temp;
-            if(strArray[0].equals(password) && strArray.length >= 2) {
-            	scan.close();
-                return Integer.parseInt(strArray[1]);
-            }
+        while((temp = scan.readLine()) != null) {         
+            if (temp.equalsIgnoreCase(password))
+            	num++;
         }
+    
         // Password not found
         scan.close();
-        return -1;
+        return num;
     }
     
     /**

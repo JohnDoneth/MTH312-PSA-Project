@@ -43,7 +43,7 @@ public class InteractPane extends VBox{
 		//initializing variables and fields
 		
 		// New back end for searching
-        String basePath = "D:/full_counted/output/";
+        String basePath = "D:/a-z_sorted/output/";
         Backend b = new Backend(basePath);  
 		
         
