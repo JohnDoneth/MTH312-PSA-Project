@@ -13,10 +13,6 @@ public class Backend {
         this.basePath = basePath;
     }
 
-    public Backend() {
-        this.basePath = "passwords/full_counted/output/";
-    }
-
     /**
      * Exact match
      * @param password
@@ -56,31 +52,20 @@ public class Backend {
         }
 
         String temp = null;
-        
+        String[] strArray;
         // Linear search for password
         while(scan.hasNextLine()) {
 
             // Check if this line is password being searched for
             temp = scan.nextLine();
-            int index = -1;
-            if(temp.matches(password + ":\\d*")) {
-                    
-                // Get index of start of count value
-                for(int i = temp.length()-1; i >= 0; --i) {
-                    if(temp.charAt(i) == ':') {
-                        index = i+1;
-                        break;
-                    }
-                }
-
-                // Read out count value
-                if(index != -1) {
-                	scan.close();
-                    return Integer.parseInt(temp.substring(index));
-                }
+            strArray = temp.split(":");
+            if (strArray[0].contains("pasha777.ru"))
+            	temp = temp;
+            if(strArray[0].equals(password) && strArray.length >= 2) {
+            	scan.close();
+                return Integer.parseInt(strArray[1]);
             }
         }
-
         // Password not found
         scan.close();
         return -1;
