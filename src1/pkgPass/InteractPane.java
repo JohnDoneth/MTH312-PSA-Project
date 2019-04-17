@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -25,6 +26,9 @@ public class InteractPane extends VBox{
 	//Password to be checked
 	private String searchString;
 	
+	//Initial basePath for External
+	private String basePath = "D:/a-z_sorted/output/";
+	
 	//Number of found passwords
 	private int numExactPass;
 	private int numContainsPass;
@@ -32,21 +36,28 @@ public class InteractPane extends VBox{
 	//Button 
 	private Button checkBtn; 
 	
+	//Menu Listener
+	MenuItem openItm = new MenuItem();
+	
+	//Alert Box
+	Alert passError = new Alert(AlertType.ERROR);
+
+	
 	/******************************************************************
 	 * Constructor that builds the Pane
 	 *****************************************************************/
-	public InteractPane(){
+	public InteractPane(MenuItem openItm){
 		setPadding(new Insets(0, 25, 10, 10));
 		setSpacing(25);
-		setAlignment(Pos.CENTER);
+		setAlignment(Pos.CENTER);	
 		
 		//initializing variables and fields
 		
 		// New back end for searching
-        String basePath = "D:/full_counted/output/";
-        Backend b = new Backend(basePath);  
-		
         
+        Backend b = new Backend(basePath);  
+        
+        this.openItm = openItm;
 		searchString = "Password123";
 		numExactPass = 0;
 		numContainsPass = 0;
@@ -69,9 +80,7 @@ public class InteractPane extends VBox{
 		passTF = new TextField();
 		passTF.setMaxWidth(200);
 		passTF.setPromptText("password");
-		
-		Alert passError = new Alert(AlertType.ERROR);
-		
+
 		getChildren().addAll(aboveLbl,passTF, checkBtn, belowLbl,bottomLbl);
 		
 		//action listener
@@ -94,7 +103,7 @@ public class InteractPane extends VBox{
 		    		//search
 		    		try{
 		    			numExactPass = b.search(searchString);
-		    			numContainsPass = b.contains(searchString);
+		    			//numContainsPass = b.contains(searchString);// (Execution time for this line is just under 16 minutes)
 		    		} catch(Exception exc) {
 		    			passError.setContentText("Error Opening File.");
 			    		passError.showAndWait();
@@ -120,6 +129,9 @@ public class InteractPane extends VBox{
 		    	}
 		    }
 		});
-		
 	}
+	
+
+
 }
+

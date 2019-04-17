@@ -32,19 +32,18 @@ public class PasswordGUI extends Application{
         //Setting title
         primaryStage.setTitle("Unique Password Identifier");
         
-        //Creating the necessary panes
-        BorderPane  mainPn = new BorderPane();
-        InteractPane InteractPn = new InteractPane();
-        
         //creating the MenuBar
         MenuBar menuBar = new MenuBar();
         Menu fileMenu = new Menu("File");
-        MenuItem newItm = new MenuItem("New");
-        
+        MenuItem openItm = new MenuItem("Open");
         
         //Setting up the menu bar
-        fileMenu.getItems().addAll(newItm);
+        fileMenu.getItems().addAll(openItm);
         menuBar.getMenus().add(fileMenu);
+        
+        //Creating the necessary panes
+        BorderPane  mainPn = new BorderPane(); 
+        InteractPane InteractPn = new InteractPane(openItm);
         
         //Setting up Main Pane
         mainPn.setTop(menuBar);
@@ -58,23 +57,17 @@ public class PasswordGUI extends Application{
         //then you set to your node
         mainPn.setBackground(new Background(myBI));
         
-        
         primaryStage.setScene(mainScene);
         primaryStage.setHeight(500);
         primaryStage.setWidth(900);
         primaryStage.show();
-        
-
-
+ 
         //Ensure system close when the red X is hit
         primaryStage.setOnCloseRequest(e -> {
             Platform.exit();
             System.exit(0);
-        });
-        
+        }); 
     }
-
-    
 }
 
 

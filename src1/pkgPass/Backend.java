@@ -14,7 +14,7 @@ public class Backend {
     }
 
     public Backend() {
-        this.basePath = "passwords/full_counted/output/";
+        this.basePath = "passwords/a-z_sorted/output/";
     }
 
     /**
@@ -25,6 +25,10 @@ public class Backend {
      */
     public int search(String password) throws Exception {
 
+    	String first3 = ""+password.charAt(0) +password.charAt(1) +password.charAt(2);
+    	String truncPass = password.substring(3);
+    	int num = 0;
+    	
         String path = basePath;
         try{
             // Make path to file
@@ -49,7 +53,7 @@ public class Backend {
         try{
 
             // Open file to search
-            scan = new Scanner(new File(path));
+            scan = new Scanner(new File(path)).useDelimiter(first3);
         }
         catch(Exception e) {
             throw new Exception();
@@ -61,29 +65,15 @@ public class Backend {
         while(scan.hasNextLine()) {
 
             // Check if this line is password being searched for
-            temp = scan.nextLine();
-            int index = -1;
-            if(temp.matches(password + ":\\d+")) {
-                    
-                // Get index of start of count value
-                for(int i = temp.length()-1; i >= 0; --i) {
-                    if(temp.charAt(i) == ':') {
-                        index = i+1;
-                        break;
-                    }
-                }
-
-                // Read out count value
-                if(index != -1) {
-                	scan.close();
-                    return Integer.parseInt(temp.substring(index));
-                }
+            temp = scan.next();
+            if(temp.matches(truncPass)) {
+               num++;
             }
-        }
 
+        }
         // Password not found
         scan.close();
-        return -1;
+        return num;
     }
 
     
