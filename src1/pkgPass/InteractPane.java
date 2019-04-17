@@ -26,6 +26,7 @@ public class InteractPane extends VBox{
 	private String searchString;
 	
 	//Number of found passwords
+	String fmtPass; //number formated for commas
 	private int numExactPass;
 	private int numContainsPass;
 	
@@ -100,13 +101,14 @@ public class InteractPane extends VBox{
 		            }
 		    		
 			        //Update Exact
+		    		fmtPass = String.format("%,d", numExactPass);
 		    		if (numExactPass <= 0)
-		    			belowLbl.setText("There were no EXACT matches for this password");
+		    			belowLbl.setText("There were no matches for this password.");
 		    		else if (numExactPass == 1)
-		    			belowLbl.setText("There was 1 other site that contained this password");
+		    			belowLbl.setText("There was 1 other site that contained this password.");
 		    		else
-			        belowLbl.setText("We Found "+ numExactPass + 
-								 " other sites with the same password");
+			        belowLbl.setText("We Found "+ fmtPass + 
+								 " other sites with the same password.");
 		    		
 //		    		//Update Contains
 //		    		if (numContainsPass <= 0)
