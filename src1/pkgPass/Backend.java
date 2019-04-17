@@ -29,9 +29,7 @@ public class Backend {
         path = getPath(password.charAt(0),password.charAt(1),password.charAt(2),basePath);
 
         BufferedReader scan = null;
-        
-        
-        
+
         try{
             // Open file to search
             scan = new BufferedReader(new FileReader(new File(path)));
@@ -42,8 +40,8 @@ public class Backend {
 
         String temp = null;
         // Linear search for password
-
-        while((temp = scan.readLine()) != null) {         
+        
+        while((temp = scan.readLine()) != null) {
             if (temp.equalsIgnoreCase(password))
             	num++;
         }
@@ -58,6 +56,8 @@ public class Backend {
      * @param password
      * @return
      * @throws Exception
+     * 
+     *UPDATE READER to match the search above (replace scan with bufferreader)
      */
     public int contains(String password) throws Exception {
 

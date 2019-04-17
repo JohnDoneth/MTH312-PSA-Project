@@ -43,9 +43,8 @@ public class InteractPane extends VBox{
 		//initializing variables and fields
 		
 		// New back end for searching
-        String basePath = "D:/a-z_sorted/output/";
+        String basePath = "D:/full_sorted/output/";
         Backend b = new Backend(basePath);  
-		
         
 		searchString = "Password123";
 		numExactPass = 0;
@@ -109,17 +108,16 @@ public class InteractPane extends VBox{
 			        belowLbl.setText("We Found "+ numExactPass + 
 								 " other sites with the same password");
 		    		
-		    		//Update Contains
-		    		if (numContainsPass <= 0)
-		    			bottomLbl.setText("There were no passwords containing that string");
-		    		else if (numContainsPass == 1)
-		    			bottomLbl.setText("There was 1 other site that contained this password");
-		    		else
-			        bottomLbl.setText("We Found "+ numContainsPass + 
-								 " other sites with a similar password");
+//		    		//Update Contains
+//		    		if (numContainsPass <= 0)
+//		    			bottomLbl.setText("There were no passwords containing that string");
+//		    		else if (numContainsPass == 1)
+//		    			bottomLbl.setText("There was 1 other site that contained this password");
+//		    		else
+//			        bottomLbl.setText("We Found "+ numContainsPass + 
+//								 " other sites with a similar password");
 		    	}
 		    }
 		});
-		
 	}
 }
